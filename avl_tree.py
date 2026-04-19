@@ -302,4 +302,87 @@ class AVLTree:
         """Return total number of nodes"""
         return self.node_count
 
+    # ============================================
+    # Traversal Methods for UI
+    # ============================================
 
+    def inorder_traversal(self):
+        """Return all products in sorted order by ID"""
+        result = []
+        self._inorder_collect(self.root, result)
+        return result
+
+    def _inorder_collect(self, node, result):
+        if node is None:
+            return
+        self._inorder_collect(node.left, result)
+        result.append({
+            'id': node.product_id,
+            'name': node.name,
+            'category': node.category,
+            'quantity': node.quantity,
+            'price': node.price
+        })
+        self._inorder_collect(node.right, result)
+
+    # ============================================
+    # Range Query Methods
+    # ============================================
+
+    def range_query(self, low, high):
+        """Return all products with IDs between low and high"""
+        result = []
+        self._range_collect(self.root, low, high, result)
+        return result
+
+    def _range_collect(self, node, low, high, result):
+        """Helper method for recursive range query"""
+        if node is None:
+            return
+
+        # If current node is greater than low, check left subtree
+        if node.product_id > low:
+            self._range_collect(node.left, low, high, result)
+
+        # If current node is within range, add it
+        if low <= node.product_id <= high:
+            result.append({
+                'id': node.product_id,
+                'name': node.name,
+                'category': node.category,
+                'quantity': node.quantity,
+                'price': node.price
+            })
+
+        # If current node is less than high, check right subtree
+        if node.product_id < high:
+            self._range_collect(node.right, low, high, result)
+
+    # ============================================
+    # Low Stock Methods
+    # ============================================
+
+    def low_stock(self, threshold):
+        """Return all products with quantity below threshold"""
+        result = []
+        self._low_stock_collect(self.root, threshold, result)
+        return result
+
+    def _low_stock_collect(self, node, threshold, result):
+        """Helper method for recursive low stock search"""
+        if node is None:
+            return
+
+        # Check left subtree
+        self._low_stock_collect(node.left, threshold, result)
+
+        # Check current node
+        if node.quantity < threshold:
+            result.append({
+                'id': node.product_id,
+                'name': node.name,
+                'quantity': node.quantity
+            })
+
+        # Check right subtree
+        self._low_stock_collect(node.right, threshold, result)
