@@ -215,7 +215,7 @@ def list_all_products_interactive(tree):
     print("-" * 80)
 
     for p in products:
-        print(f"{p['id']:<8} {p['name']:<25} {p['category']:<15} "
+        print(f"{p['product_id']:<8} {p['name']:<25} {p['category']:<15} "
               f"{p['quantity']:<8} ${p['price']:<10.2f}")
 
     print("-" * 80)
@@ -242,7 +242,7 @@ def range_query_interactive(tree):
             if node:
                 collect(node.left)
                 all_products.append({
-                    'id': node.product_id,
+                    'product_id': node.product_id,
                     'name': node.name,
                     'category': node.category,
                     'quantity': node.quantity,
@@ -263,7 +263,7 @@ def range_query_interactive(tree):
     print("-" * 80)
 
     for p in results:
-        print(f"{p['id']:<8} {p['name']:<25} {p['category']:<15} "
+        print(f"{p['product_id']:<8} {p['name']:<25} {p['category']:<15} "
               f"{p['quantity']:<8} ${p['price']:<10.2f}")
 
     print("-" * 80)
@@ -285,7 +285,7 @@ def low_stock_interactive(tree):
                 collect(node.left)
                 if node.quantity < threshold:
                     results.append({
-                        'id': node.product_id,
+                        'product_id': node.product_id,
                         'name': node.name,
                         'quantity': node.quantity
                     })
@@ -304,7 +304,7 @@ def low_stock_interactive(tree):
 
     for p in results:
         status = "⚠ CRITICAL" if p['quantity'] < 5 else "⚠ Low"
-        print(f"{p['id']:<8} {p['name']:<25} {p['quantity']:<10} {status:<15}")
+        print(f"{p['product_id']:<8} {p['name']:<25} {p['quantity']:<10} {status:<15}")
 
     print("-" * 60)
 

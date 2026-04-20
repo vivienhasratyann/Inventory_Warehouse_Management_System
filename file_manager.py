@@ -71,11 +71,12 @@ def save_inventory(filename, avl_tree):
     Save all products from AVL tree to CSV file.
     Returns number of products saved.
     """
+    products = []  # ← DEFINE HERE FIRST (FIX)
+
     try:
         products = avl_tree.inorder_traversal()
     except AttributeError:
-        products = []
-
+        # Fallback: collect manually
         def collect(node):
             if node:
                 collect(node.left)

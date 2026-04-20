@@ -185,7 +185,7 @@ class AVLTree:
         # Case 4: Right-Left
         if balance < -1 and product_id < node.right.product_id:
             return self._right_left_rotate(node)
-
+        
         return node
 
     # ============================================
@@ -313,17 +313,18 @@ class AVLTree:
         return result
 
     def _inorder_collect(self, node, result):
+        """Helper method for recursive in-order traversal"""
         if node is None:
             return
-        self._inorder_collect(node.left, result)
+        self._inorder_collect(node.left, result)  # ← Must call on left
         result.append({
-            'id': node.product_id,
+            'product_id': node.product_id,
             'name': node.name,
             'category': node.category,
             'quantity': node.quantity,
             'price': node.price
         })
-        self._inorder_collect(node.right, result)
+        self._inorder_collect(node.right, result)  # ← Must call on right
 
     # ============================================
     # Range Query Methods
@@ -347,7 +348,7 @@ class AVLTree:
         # If current node is within range, add it
         if low <= node.product_id <= high:
             result.append({
-                'id': node.product_id,
+                'product_id': node.product_id,
                 'name': node.name,
                 'category': node.category,
                 'quantity': node.quantity,
@@ -379,7 +380,7 @@ class AVLTree:
         # Check current node
         if node.quantity < threshold:
             result.append({
-                'id': node.product_id,
+                'product_id': node.product_id,
                 'name': node.name,
                 'quantity': node.quantity
             })
