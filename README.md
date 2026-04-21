@@ -1,6 +1,8 @@
 # 📦 Inventory Management System
 
-> An AVL Tree-powered inventory engine with O(log n) operations
+> Inventory Management System is a command-line application that helps businesses track products, manage stock levels, and perform fast inventory queries. The system is built around an AVL Tree (self-balancing binary search tree) implemented from scratch, ensuring all operations run in O(log n) time.
+
+The program loads product data from a CSV file and allows users to add, delete, search by ID, query ID ranges, list all products in sorted order, check low stock items, and view inventory statistics. After each operation, the tree automatically rebalances itself using rotations (left, right, left-right, right-left) to maintain logarithmic height.
 
 ---
 
