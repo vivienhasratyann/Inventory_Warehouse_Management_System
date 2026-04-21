@@ -50,20 +50,3 @@
 8. Save & Exit
 
 ---
-
-## 📁 File Structure
-
-┌────────────────────────────────────────────────────────────┐
-│  INVENTORY MANAGEMENT SYSTEM                               │
-├────────────────────────────────────────────────────────────┤
-│  📄 main.py           Entry point                          │
-│  🌲 avl_tree.py       AVL Tree                    │
-│  🔍 queries.py        Queries                       │
-│  🖥️ ui.py             User interface               │
-│  💾 file_manager.py   CSV operations               │
-│  🔧 create_inventory.py  Sample data generator             │
-│  ✅ test_avl.py       AVL tests                            │
-│  ✅ test_queries.py   Query tests                          │
-│  📁 data/                                                 │
-│      └── inventory.csv  Product database                   │
-└────────────────────────────────────────────────────────────┘
