@@ -88,17 +88,19 @@ def display_menu():
     print("  5. List all products")
     print("  6. Low stock alert")
     print("  7. Statistics")
-    print("  8. Save & Exit")
+    print("  8. Search by Category")
+    print("  9. Search by Name")
+    print("  10. Save & Exit")
     print("=" * 60)
 
 
 def get_user_choice():
     """Get and validate menu choice."""
     while True:
-        choice = input("\nEnter choice (1-8): ").strip()
-        if choice in ('1', '2', '3', '4', '5', '6', '7', '8'):
+        choice = input("\nEnter choice (1-10): ").strip()
+        if choice in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'):
             return int(choice)
-        print("  Invalid choice. Please enter 1-8.")
+        print("  Invalid choice. Please enter 1-10.")
 
 
 # ============================================
@@ -342,6 +344,54 @@ def statistics_interactive(tree):
     if categories:
         print(f"\nCategories: {', '.join(sorted(categories))}")
 
+def search_by_category_interactive(tree):
+    """Search and display products by category."""
+    print("\n--- SEARCH BY CATEGORY ---")
+    
+    category = get_string_input("Enter category name: ", min_length=1, max_length=50)
+    
+    from queries import InventoryQueries
+    queries = InventoryQueries(tree)
+    results = queries.search_by_category(category)
+    
+    if not results:
+        print(f"No products found in category '{category}'")
+        return
+    
+    print(f"\nFound {len(results)} products in category '{category}':")
+    print("-" * 80)
+    print(f"{'ID':<8} {'Name':<30} {'Qty':<8} {'Price':<10}")
+    print("-" * 80)
+    
+    for p in results:
+        print(f"{p['id']:<8} {p['name']:<30} {p['quantity']:<8} ${p['price']:<10.2f}")
+    
+    print("-" * 80)
+
+
+def search_by_name_interactive(tree):
+    """Search and display products by name keyword."""
+    print("\n--- SEARCH BY NAME ---")
+    
+    keyword = get_string_input("Enter keyword to search: ", min_length=1, max_length=50)
+    
+    from queries import InventoryQueries
+    queries = InventoryQueries(tree)
+    results = queries.search_by_name(keyword)
+    
+    if not results:
+        print(f"No products found with '{keyword}' in name")
+        return
+    
+    print(f"\nFound {len(results)} products containing '{keyword}':")
+    print("-" * 80)
+    print(f"{'ID':<8} {'Name':<30} {'Category':<15} {'Qty':<8} {'Price':<10}")
+    print("-" * 80)
+    
+    for p in results:
+        print(f"{p['id']:<8} {p['name']:<30} {p['category']:<15} {p['quantity']:<8} ${p['price']:<10.2f}")
+    
+    print("-" * 80)
 
 def save_and_exit_interactive(tree, filename):
     """Save inventory and return flag to exit."""

@@ -11,7 +11,7 @@ from ui import (
     add_product_interactive, delete_product_interactive,
     search_product_interactive, list_all_products_interactive,
     range_query_interactive, low_stock_interactive,
-    statistics_interactive, save_and_exit_interactive
+    statistics_interactive, search_by_category_interactive, search_by_name_interactive, save_and_exit_interactive
 )
 
 INVENTORY_FILE = "data/inventory.csv"
@@ -50,6 +50,10 @@ def main():
         elif choice == 7:
             statistics_interactive(tree)
         elif choice == 8:
+            search_by_category_interactive(tree)
+        elif choice == 9:
+            search_by_name_interactive(tree)
+        elif choice == 10:
             if save_and_exit_interactive(tree, INVENTORY_FILE):
                 break
 
