@@ -14,7 +14,6 @@ class InventoryQueries:
         """Initialize with an AVL tree"""
         self.tree = tree
     
-    
     def inorder_traversal(self):
         """Return all products in sorted order by ID"""
         result = []
@@ -26,10 +25,8 @@ class InventoryQueries:
         if node is None:
             return
         
-        # Traverse left subtree
         self._inorder_recursive(node.left, result)
         
-        # Add current node
         result.append({
             'id': node.product_id,
             'name': node.name,
@@ -38,7 +35,6 @@ class InventoryQueries:
             'price': node.price
         })
         
-        # Traverse right subtree
         self._inorder_recursive(node.right, result)
     
     

@@ -303,28 +303,44 @@ def low_stock_interactive(tree):
     print("-" * 60)
 
     for p in results:
-        status = "⚠ CRITICAL" if p['quantity'] < 5 else "⚠ Low"
+        status = "⚠ CRITICAL" if p['quantity'] < 10 else "⚠ Low"
         print(f"{p['product_id']:<8} {p['name']:<25} {p['quantity']:<10} {status:<15}")
 
     print("-" * 60)
 
 
 def statistics_interactive(tree):
-    """Display tree statistics."""
+    """Display tree statistics with total value and categories."""
     print("\n--- INVENTORY STATISTICS ---")
-
+    
+    # Basic tree stats
     node_count = tree.get_node_count()
     height = tree.get_height(tree.root)
     balance = tree.get_balance(tree.root)
-
-    print(f"Total products: {node_count}")
-    print(f"Tree height: {height}")
-    print(f"Root balance factor: {balance:+d}")
-
-    if abs(balance) <= 1:
-        print("Tree status: ✓ Balanced")
-    else:
-        print("Tree status: ✗ Unbalanced (should not happen with AVL)")
+    
+    # Calculate total value and collect categories
+    total_value = 0
+    categories = set()
+    
+    def traverse(node):
+        nonlocal total_value
+        if node is None:
+            return
+        traverse(node.left)
+        total_value += node.quantity * node.price
+        categories.add(node.category)
+        traverse(node.right)
+    
+    traverse(tree.root)
+    
+    print(f"Total Products:     {node_count:<19}")
+    print(f"Total Value:        ${total_value:,.2f}{' ' * (12 - len(f'{total_value:,.2f}'))}")
+    print(f"Unique Categories:  {len(categories):<19}")
+    print(f"Tree Height:        {height:<19}")
+    print(f"Balance Status:     {'✓ Balanced' if abs(balance) <= 1 else '✗ Unbalanced':<19}")
+    
+    if categories:
+        print(f"\nCategories: {', '.join(sorted(categories))}")
 
 
 def save_and_exit_interactive(tree, filename):

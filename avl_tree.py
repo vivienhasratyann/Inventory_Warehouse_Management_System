@@ -22,7 +22,6 @@ class AVLNode:
         # AVL metadata
         self.height = 1
 
-
 class AVLTree:
     """AVL Tree implementation with self-balancing properties"""
 
