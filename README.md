@@ -42,12 +42,14 @@ The program loads product data from a CSV file and allows users to add, delete, 
 ## 🎮 Menu Options
 
 1. Add product
-2. Delete product  
+2. Delete product
 3. Search by ID
-4. Range query (IDs between X and Y)
+4. Range query
 5. List all products
 6. Low stock alert
 7. Statistics
-8. Save & Exit
+8. Search by Category
+9. Search by Name
+10. Save & Exit
 
 ---
