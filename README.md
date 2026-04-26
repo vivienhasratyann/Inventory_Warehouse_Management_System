@@ -39,6 +39,17 @@ The program loads product data from a CSV file and allows users to add, delete, 
 
 ---
 
+## ⏱️ Time Complexity
+
+| Operation | Time |
+|-----------|------|
+| Search / Insert / Delete | O(log n) |
+| Range Query | O(log n + k) |
+| In-order Traversal | O(n) |
+| Low Stock Alert | O(n) |
+
+---
+
 ## 🎮 Menu Options
 
 1. Add product
